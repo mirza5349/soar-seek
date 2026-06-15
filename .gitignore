@@ -34,3 +34,9 @@ __pycache__/
 
 # Vendored ROS 2 message dependency (cloned separately)
 ros2_ws/src/px4_msgs/
+
+# Result LaTeX sources and PDFs kept local only (not pushed)
+results/**/*.tex
+results/**/*.pdf
+results/*.tex
+results/*.pdf
