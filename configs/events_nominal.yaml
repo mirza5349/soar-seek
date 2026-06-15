@@ -1,0 +1,8 @@
+# Override file: merged on top of scenario_nominal.yaml by run scripts
+ground_event_node:
+  ros__parameters:
+    event_lifetime_s: 120.0
+    event_radius_m: 20.0
+    event_rate_hz: 0.05
+    high_priority_ratio: 0.4
+    initial_event_count: 12

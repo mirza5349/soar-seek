@@ -1,0 +1,16 @@
+\begin{table*}[t]
+\centering
+\small
+\caption{Scalability and resource overhead (3 seeds per fleet size). Denominator is the requested fleet size. Message-drop rate was not instrumented (NR). MAVLink timeouts are detailed in the timeout analysis.}
+\label{tab:scalability_overhead}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrrrrrr}
+\toprule
+Fleet & Armed & Arming (\%) & CPU (\%) & Memory (\%) & RTF & Latency (ms) & Drop rate & MAVLink TO & Proc. fail & Log (MB) \\
+\midrule
+6 UAVs & 6 & 100 & 24.5 & 22.2 & 1.01 & 5.2 & NR & 0.0 & 0.0 & 3 \\
+12 UAVs & 12 & 100 & 44.8 & 23.8 & 1.01 & 7.6 & NR & 0.0 & 0.0 & 7 \\
+24 UAVs & 24 & 100 & 71.7 & 28.2 & 1.00 & 17.5 & NR & 24.3 & 0.0 & 13 \\
+\bottomrule
+\end{tabular}}
+\end{table*}

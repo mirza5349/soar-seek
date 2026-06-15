@@ -1,0 +1,17 @@
+Metric,Value
+Number of trials,6
+Landing-zone radius (m),100
+Landing-state entry rate (%),100.0
+Approach completion rate (%),100.0
+Landing-zone success rate (%),83.3
+Touchdown success rate (%),66.7
+Disarm success rate (%),83.3
+Landing completion rate (%),66.7
+Mean landing duration (s),146.7
+Mean final horizontal error (m),67.9
+Mean cross-track error (m),54.6
+Mean final altitude error (m),1.93
+Mean descent rate (m/s),1.14
+Max sustained descent rate (m/s),2.72
+Command rejections,0
+MAVLink timeouts,0

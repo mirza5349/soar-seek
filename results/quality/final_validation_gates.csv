@@ -1,0 +1,8 @@
+gate,passed,detail
+px4_jsbsim_status_not_fail,True,status=PASS_WITH_DOCUMENTED_STARTUP_TRANSIENTS
+px4_jsbsim_anomaly_records_available,True,px4_jsbsim_anomalies.csv present
+at_least_5_valid_landing_trials,True,6 valid trials
+touchdown_reported_separately_from_entry,True,
+landing_claim_matches_result,True,"touchdown=83.3%, claim='full_landing_cycle'"
+new_figures_backed_by_csv,True,
+no_contradictory_verification_statements,True,old self-consistency row removed; ekf_vs_fdm present

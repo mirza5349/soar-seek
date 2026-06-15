@@ -1,0 +1,9 @@
+matplotlib>=3.5.0
+pandas>=1.3.0
+numpy>=1.21.0
+pyyaml>=6.0
+psutil>=5.8.0
+shapely>=2.0
+scipy>=1.8
+pymavlink>=2.4
+mavsdk>=1.4

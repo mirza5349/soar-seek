@@ -1,0 +1,6 @@
+check,result,detail
+mav_sys_id_uniqueness,PASS,"MAV_SYS_ID = instance+1, unique"
+mavsdk_offboard_port_uniqueness,PASS,"14640+id band, unique for all IDs incl. >=10 (port-collision fix)"
+mavsdk_grpc_port_uniqueness,PASS,"50050+id, unique"
+one_connection_per_uav,PASS,0/126 routing failures
+mavlink_command_timeout_rate,INFO,mean 0.0 timeouts/run

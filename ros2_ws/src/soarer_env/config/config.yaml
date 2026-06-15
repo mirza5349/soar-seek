@@ -1,0 +1,194 @@
+battery_estimator_node:
+  ros__parameters:
+    AR: 14.0
+    CD0: 0.012
+    V_nom: 14.8
+    battery_capacity_wh: 0.55
+    battery_model: aero
+    constant_power_w: 55.0
+    eta_prop: 0.85
+    mass_kg: 1.5
+    oswald_e: 0.95
+    rho_kg_m3: 1.225
+    update_rate_hz: 2.0
+    wing_area_m2: 0.9
+fov_detection_node:
+  ros__parameters:
+    fov_half_angle_deg: 60.0
+    max_detection_range_m: 500.0
+    update_rate_hz: 2.0
+fsm_node:
+  ros__parameters:
+    enable_event_investigation: false
+    enable_soaring: false
+    event_investigation_priority_threshold: 3
+    investigation_duration_s: 30.0
+    max_cue_distance_m: 1000.0
+    patrol_waypoints_1:
+    - 2700.0
+    - 2800.0
+    - 150.0
+    - 300.0
+    - 2700.0
+    - 150.0
+    - 200.0
+    - 2500.0
+    - 150.0
+    - 2600.0
+    - 2500.0
+    - 150.0
+    - 2500.0
+    - 2200.0
+    - 150.0
+    - 400.0
+    - 2200.0
+    - 150.0
+    - 500.0
+    - 1900.0
+    - 150.0
+    - 2400.0
+    - 1900.0
+    - 150.0
+    patrol_waypoints_2:
+    - 2400.0
+    - 1900.0
+    - 150.0
+    - 2300.0
+    - 1600.0
+    - 150.0
+    - 600.0
+    - 1600.0
+    - 150.0
+    - 700.0
+    - 1300.0
+    - 150.0
+    - 2200.0
+    - 1300.0
+    - 150.0
+    - 2100.0
+    - 1000.0
+    - 150.0
+    - 800.0
+    - 1000.0
+    - 150.0
+    patrol_waypoints_3:
+    - 800.0
+    - 1000.0
+    - 150.0
+    - 900.0
+    - 700.0
+    - 150.0
+    - 2000.0
+    - 700.0
+    - 150.0
+    - 1900.0
+    - 400.0
+    - 150.0
+    - 1000.0
+    - 400.0
+    - 150.0
+    - 1100.0
+    - 100.0
+    - 150.0
+    - 1800.0
+    - 100.0
+    - 150.0
+    patrol_waypoints_4:
+    - 1800.0
+    - 100.0
+    - 150.0
+    - 1700.0
+    - -200.0
+    - 150.0
+    - 1200.0
+    - -200.0
+    - 150.0
+    - 1300.0
+    - -500.0
+    - 150.0
+    - 1600.0
+    - -500.0
+    - 150.0
+    - 1500.0
+    - -800.0
+    - 150.0
+    - 1400.0
+    - -800.0
+    - 150.0
+    patrol_waypoints_5:
+    - 1400.0
+    - -800.0
+    - 150.0
+    - 1100.0
+    - -1100.0
+    - 150.0
+    - 1300.0
+    - -1100.0
+    - 150.0
+    - 1200.0
+    - -1400.0
+    - 150.0
+    - 1000.0
+    - -1400.0
+    - 150.0
+    - 900.0
+    - -1700.0
+    - 150.0
+    - 1100.0
+    - -1700.0
+    - 150.0
+    patrol_waypoints_6:
+    - 1100.0
+    - -1700.0
+    - 150.0
+    - 1000.0
+    - -2000.0
+    - 150.0
+    - 800.0
+    - -2000.0
+    - 150.0
+    - 700.0
+    - -2300.0
+    - 150.0
+    - 900.0
+    - -2300.0
+    - 150.0
+    reserve_soc: 25.0
+    search_soc: 50.0
+    thermal_ceiling_m: 400.0
+    update_rate_hz: 10.0
+    usable_lift_threshold: 1.5
+ground_event_node:
+  ros__parameters:
+    area_size_m: 2000.0
+    event_lifetime_s: 120.0
+    event_radius_m: 20.0
+    event_rate_hz: 0.05
+    high_priority_ratio: 0.4
+    initial_event_count: 12
+    max_active_events: 30
+    ref_lat_deg: 47.458159
+    ref_lon_deg: 8.548004
+    seed: 142
+    update_rate_hz: 1.0
+metrics_collector_node:
+  ros__parameters:
+    num_vehicles: 6
+    output_dir: /home/px4_sitl/sim_paper/logs/raw
+    reported_value_flag: JSBSIM
+    update_rate_hz: 1.0
+thermal_field_node:
+  ros__parameters:
+    alt_ceiling_m: 500.0
+    alt_floor_m: 30.0
+    area_size_m: 2000.0
+    drift_speed_mps: 0.5
+    num_thermals: 8
+    num_vehicles: 6
+    radius_max_m: 200.0
+    radius_min_m: 50.0
+    seed: 42
+    thermal_lifetime_s: 600.0
+    update_rate_hz: 5.0
+    w_peak_max_mps: 5.0
+    w_peak_min_mps: 1.5

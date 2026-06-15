@@ -1,0 +1,139 @@
+[
+  {
+    "campaign": "scalability",
+    "N": 6,
+    "seeds": [101, 102, 103],
+    "duration": 50,
+    "ld_flag": "JSBSIM",
+    "overrides": {}
+  },
+  {
+    "campaign": "scalability",
+    "N": 12,
+    "seeds": [101, 102, 103],
+    "duration": 50,
+    "ld_flag": "JSBSIM",
+    "overrides": {}
+  },
+  {
+    "campaign": "scalability",
+    "N": 24,
+    "seeds": [101, 102, 103],
+    "duration": 50,
+    "ld_flag": "JSBSIM",
+    "overrides": {}
+  },
+  {
+    "campaign": "stochastic",
+    "N": 6,
+    "seeds": [42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61],
+    "duration": 50,
+    "ld_flag": "JSBSIM",
+    "overrides": {}
+  },
+  {
+    "campaign": "thermal_sensitivity",
+    "N": 6,
+    "seeds": [42, 43, 44],
+    "duration": 50,
+    "ld_flag": "JSBSIM",
+    "label": "low_density",
+    "overrides": {
+      "thermal_field_node": {
+        "ros__parameters": {
+          "num_thermals": 4,
+          "w_peak_max_mps": 3.0
+        }
+      }
+    }
+  },
+  {
+    "campaign": "thermal_sensitivity",
+    "N": 6,
+    "seeds": [42, 43, 44],
+    "duration": 50,
+    "ld_flag": "JSBSIM",
+    "label": "high_density",
+    "overrides": {
+      "thermal_field_node": {
+        "ros__parameters": {
+          "num_thermals": 16,
+          "w_peak_max_mps": 6.0
+        }
+      }
+    }
+  },
+  {
+    "campaign": "event_sensitivity",
+    "N": 6,
+    "seeds": [42, 43, 44],
+    "duration": 50,
+    "ld_flag": "JSBSIM",
+    "label": "low_load",
+    "overrides": {
+      "ground_event_node": {
+        "ros__parameters": {
+          "event_rate_hz": 0.02
+        }
+      }
+    }
+  },
+  {
+    "campaign": "event_sensitivity",
+    "N": 6,
+    "seeds": [42, 43, 44],
+    "duration": 50,
+    "ld_flag": "JSBSIM",
+    "label": "high_load",
+    "overrides": {
+      "ground_event_node": {
+        "ros__parameters": {
+          "event_rate_hz": 0.12
+        }
+      }
+    }
+  },
+  {
+    "campaign": "baseline_coverage",
+    "N": 6,
+    "seeds": [42, 43, 44],
+    "duration": 50,
+    "ld_flag": "JSBSIM",
+    "overrides": {
+      "fsm_node": {
+        "ros__parameters": {
+          "enable_soaring": false,
+          "enable_event_investigation": false
+        }
+      }
+    }
+  },
+  {
+    "campaign": "ablation_soaring_only",
+    "N": 6,
+    "seeds": [42, 43, 44],
+    "duration": 50,
+    "ld_flag": "JSBSIM",
+    "overrides": {
+      "fsm_node": {
+        "ros__parameters": {
+          "enable_event_investigation": false
+        }
+      }
+    }
+  },
+  {
+    "campaign": "ablation_event_only",
+    "N": 6,
+    "seeds": [42, 43, 44],
+    "duration": 50,
+    "ld_flag": "JSBSIM",
+    "overrides": {
+      "fsm_node": {
+        "ros__parameters": {
+          "enable_soaring": false
+        }
+      }
+    }
+  }
+]

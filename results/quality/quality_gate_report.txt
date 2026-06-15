@@ -1,0 +1,26 @@
+SOAR & SEEK — QUALITY GATE REPORT
+==================================================
+[PASS] Gate 1: no negative execution duration
+[PASS] Gate 2: no missing UAV IDs
+[PASS] Gate 3: no missing timestamps
+[PASS] Gate 4: no duplicate ROS 2 namespace assignments
+[PASS] Gate 5: no missing event-state labels
+[PASS] Gate 6: thermal segments have entry/exit labels
+[PASS] Gate 7: SOC column present
+[PASS] Gate 8: SOC within [0, 100]
+[PASS] Gate 9: no synthetic fallback (provenance for every table)
+[PASS] Gate 10: every plotted value backed by a CSV from raw logs
+[PASS] Gate 11: every figure has PNG and PDF
+[PASS] Gate 12: all tables present as CSV
+[PASS] Gate 13: old results PDF archived/deleted
+[PASS] Gate 14: no duplicate MAVLink system IDs
+[PASS] Gate 15: no UDP port collisions
+[PASS] Gate 16: no duplicate DDS client keys
+[PASS] Gate 17: no duplicate ROS 2 namespaces
+[PASS] Gate 18: route distance validates to 23.3 km  — selected route = 23.29 km (target 23.3 +/- 0.5)
+[PASS] Gate 19: exclusions correctly classified (run vs uav-record)
+[PASS] Gate 20: all requested UAVs in scalability denominators
+[PASS] Gate 21: baseline seeds matched (>=5 paired)
+[PASS] Gate 22: event lifecycle temporally valid
+==================================================
+22/22 gates passed.

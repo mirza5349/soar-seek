@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+  Initial conditions: straight-and-level cruise
+  V_cruise = 18 m/s = 35.0 kts
+  h_ref    = 400 m  = 1312 ft
+  alpha    = 0.337 deg  (trim alpha at cruise, zero wind)
+  gamma    = 0 deg      (level flight)
+  throttle = 0.115      (11.5% — analytically computed trim throttle)
+
+  Wind: zero (default).  To add an updraft during a Python run, set:
+    fdm["atmosphere/wind-down-fps"] = -updraft_fps
+  and simultaneously set fdm["soarer/updraft-fps"] = updraft_fps.
+-->
+<initialize name="cruise">
+  <latitude  unit="DEG">  0.0    </latitude>
+  <longitude unit="DEG">  0.0    </longitude>
+  <altitude  unit="FT">   1312.3 </altitude>   <!-- 400 m -->
+  <vc        unit="KTS">  35.00  </vc>          <!-- 18 m/s = 34.99 kts -->
+  <alpha     unit="DEG">  0.337  </alpha>        <!-- CL-required trim alpha -->
+  <beta      unit="DEG">  0.0    </beta>
+  <gamma     unit="DEG">  0.0    </gamma>        <!-- level flight -->
+  <phi       unit="DEG">  0.0    </phi>
+  <psi       unit="DEG">  0.0    </psi>          <!-- heading North -->
+  <ubody     unit="FT/SEC"> 0.0    </ubody>        <!-- body-frame override off -->
+  <vbody     unit="FT/SEC"> 0.0    </vbody>
+  <wbody     unit="FT/SEC"> 0.0    </wbody>
+  <p         unit="RAD/SEC"> 0.0   </p>
+  <q         unit="RAD/SEC"> 0.0   </q>
+  <r         unit="RAD/SEC"> 0.0   </r>
+  <vt        unit="FT/SEC">  59.06 </vt>          <!-- 18 m/s true airspeed -->
+</initialize>

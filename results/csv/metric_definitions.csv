@@ -1,0 +1,23 @@
+metric,unit,definition
+route_completion,%,Fraction of a UAV's assigned patrol waypoints reached (max wp index / total wp) x100
+scenario_termination,bool,Run reached its time horizon or all UAVs landed/terminated without process crash
+landing_state_entry,bool,UAV FSM entered LANDING state (reserve-SOC or end-of-mission trigger)
+landing_completion,bool,UAV entered LANDING and reached <5 m AGL at <2 m/s ground speed
+mission_success,bool,Vehicle did not crash AND (landed OR route_completion=100% OR still airborne at horizon)
+event_detection,event,Active event center within camera slant range AND inside angular FOV cone (incl. footprint radius)
+event_investigation,event,UAV entered EVENT_INVESTIGATION targeting a detected HP event and loitered >= min_investigation_s
+event_expiration,event,Event lifetime ended (t >= expiration_time) before any investigation began
+unresolved_event,event,"HP event still active at run end, never investigated"
+thermal_encounter,count,One accepted PATROL/SEARCH/GLIDE -> THERMAL_EXPLOITATION transition (after entry confirmation)
+thermalling_duration,s,Cumulative wall-clock sim time a UAV spent in THERMAL_EXPLOITATION
+thermal_alt_gain,m,Altitude at exit minus altitude at entry of a THERMAL_EXPLOITATION segment
+propulsion_energy,Wh,Integral of aerodynamic propulsion power only (no avionics/payload/comms/compute)
+propulsion_energy_saving,Wh,Mean patrol/cruise power x thermalling time: propulsion energy avoided vs powered cruise
+final_soc,%,"State of charge at run end, relative to the (scaled) battery capacity"
+hp_detected_pct,%,HP events with >=1 detection / total HP events x100
+hp_investigated_pct,%,HP events investigated / total HP events x100
+investigation_latency,s,investigation_start_time - first_detect_time for investigated HP events
+fsm_transitions_per_min,1/min,Accepted FSM state transitions per minute of execution
+rejected_transitions,count,Transition requests blocked by min-dwell / cooldown guards
+real_time_factor,ratio,Simulated time advanced / wall time elapsed (1.0 = real time)
+uav_arming_success,%,UAVs that armed / UAVs requested x100 (denominator = requested fleet size)

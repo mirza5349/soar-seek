@@ -1,0 +1,7 @@
+parameter,value,justification
+num_thermals (low/nom/high),4 / 8 / 16,Spans sparse to dense soaring fields over the 9 km^2 region
+w_peak_max_mps (low/nom/high),3.0 / 5.0 / 6.0,Typical low-altitude convective updraft strengths
+radius_max_m (low/nom/high),150 / 200 / 250,Thermal core radii consistent with boundary-layer scales
+thermal_lifetime_s,300 / 600 / 900,Convective cell persistence; exponential expiry
+alt_ceiling_m,500,Convective boundary-layer top in the modelled scenario
+usable/entry/exit lift,1.5 / 2.0 / 0.8 m/s,Entry>exit hysteresis band around minimum useful lift

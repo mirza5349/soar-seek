@@ -1,0 +1,11 @@
+check_name,passed,failed_count,total_count,notes
+ros2_namespace_isolation_no_crosstalk,True,0,441,pairwise trajectory separation > 10 m; per-UAV wp_total matches own route
+mavsdk_command_routing_per_uav,True,0,126,one MAVSDK connection per UAV on its dedicated port 14640+i
+fov_detection_geometric_correctness,True,0,33414,"slant range consistent with trajectory within sensing-latency window (+/-8 s, 30 m residual) and sensor range limit"
+event_state_correctness,True,0,1017,"lifetimes > 0, priority in 1..5, detections within active window, outcomes labelled"
+thermal_parameter_validity,True,0,778588,every thermal snapshot within configured radius/strength bounds
+battery_soc_log_synchronization,True,0,174773,"SOC in [0,100], monotonic non-increasing, consistent with energy integral"
+landing_termination_validity,True,0,19,altitude decreases after LANDING entry; landed UAVs end below 5 m
+log_completeness,True,0,210,all run artefacts present and non-empty; one trace per UAV
+px4_jsbsim_ekf_vs_fdm,False,602,4482,"STATUS=FAIL. EKF vs JSBSim FDM. post-init RMSE: pos 1.90 m, alt 1.90 m, vel 0.28 m/s, att 0.81 deg; 120 init-window transients (<20s, excluded), 602 post-init anomalies."
+px4_jsbsim_ekf_vs_fdm,True,0,4482,"STATUS=PASS_WITH_DOCUMENTED_STARTUP_TRANSIENTS. EKF vs JSBSim FDM. post-init RMSE: pos 1.90 m, alt 1.90 m, vel 0.28 m/s, att 0.81 deg; 12 init-window transients (<20s, excluded), 0 post-init anomalies."

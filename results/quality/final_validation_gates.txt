@@ -1,0 +1,11 @@
+SOAR & SEEK — FINAL VALIDATION GATES
+==================================================
+[PASS] px4_jsbsim_status_not_fail  — status=PASS_WITH_DOCUMENTED_STARTUP_TRANSIENTS
+[PASS] px4_jsbsim_anomaly_records_available  — px4_jsbsim_anomalies.csv present
+[PASS] at_least_5_valid_landing_trials  — 6 valid trials
+[PASS] touchdown_reported_separately_from_entry
+[PASS] landing_claim_matches_result  — touchdown=83.3%, claim='full_landing_cycle'
+[PASS] new_figures_backed_by_csv
+[PASS] no_contradictory_verification_statements  — old self-consistency row removed; ekf_vs_fdm present
+==================================================
+7/7 gates passed.

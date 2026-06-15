@@ -1,0 +1,5 @@
+model,final_soc_pct_mean,final_soc_pct_std,mean_propulsion_power_w,soc_diff_vs_online_pct,soc_rmse_vs_online_pct,notes
+online_propulsion_only_estimator,20.868758333333336,11.849660372394917,16.081279503234416,0.0,,"model under test; aerodynamic state-dependent power, motor-off soaring modelled (self-RMSE not a validation -> NaN)"
+constant_power_discharge_baseline,20.86880208333333,11.849658142114253,16.081279503234416,4.3749999992570565e-05,7.481424464572224,"same mean energy, ignores state-dependent draw (no soaring savings shape)"
+px4_default_battery_estimate,50.577000000000005,1.4153252439699109,,29.70824166666667,20.217902784726597,"PX4 SITL simulated battery (different capacity model, independent reference)"
+external_realflight_reference,,,,,,NaN: no instrumented real-flight energy log available for this airframe

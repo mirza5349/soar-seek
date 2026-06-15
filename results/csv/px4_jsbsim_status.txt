@@ -1,0 +1,2 @@
+PASS_WITH_DOCUMENTED_STARTUP_TRANSIENTS
+EKF vs JSBSim FDM. post-init RMSE: pos 1.90 m, alt 1.90 m, vel 0.28 m/s, att 0.81 deg; 12 init-window transients (<20s, excluded), 0 post-init anomalies.

@@ -1,0 +1,22 @@
+\begin{table*}[t]
+\centering
+\small
+\caption{Framework-verification summary. The PX4--JSBSim row reports the final post-initialization result only.}
+\label{tab:framework_verification}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllrll}
+\toprule
+Verification check & Metric & Acceptance threshold & Samples & Result & Notes \\
+\midrule
+PX4-EKF vs JSBSim-FDM & pos(3D NED)/alt/vel/vspeed/att RMSE & 5 m / 5 m / 2 (m/s) / 2 (m/s) / 10 deg & 4482 & PASS\_WITH\_DOCUMENTED\_STARTUP\_TRANSIENTS & means 1.90 m / 1.90 m / 0.28 / 0.28 (m/s) / 0.81 deg; post-init, 20 s init window excluded \\
+ROS 2 namespace isolation & consistency check & 0 failures & 441 & PASS & unique px4\textbackslash{}\_$i$ namespace + source ID per UAV; 0 messages from an incorrect namespace \\
+MAVSDK command routing & consistency check & 0 failures & 126 & PASS & one connection per UAV \\
+FOV detection correctness & consistency check & 0 failures & 33414 & PASS & slant range vs trajectory \\
+Event-state correctness & consistency check & 0 failures & 1017 & PASS & lifecycle ordering + priority \\
+Thermal-parameter validity & consistency check & 0 failures & 778588 & PASS & within configured bounds \\
+SOC/log synchronization & consistency check & 0 failures & 174773 & PASS & SOC monotonic in [0,100] \\
+Landing-state validity & consistency check & 0 failures & 19 & PASS & descending landing trajectory \\
+Log completeness & consistency check & 0 failures & 210 & PASS & all artefacts present \\
+\bottomrule
+\end{tabular}}
+\end{table*}

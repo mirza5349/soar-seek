@@ -1,0 +1,15 @@
+capability,soar_and_seek,evidence
+Fixed-wing flight dynamics,Yes (JSBSim 6-DOF),verified: JSBSim FDM per vehicle
+PX4 SITL autopilot,Yes,verified: PX4 instance per vehicle
+JSBSim backend,Yes,verified
+ROS 2 integration,Yes (Humble),verified: namespaced topics per UAV
+Concurrent multi-UAV,Yes (tested to 24),verified after offboard-port fix
+Thermal field model,Yes (Allen toroidal),verified: updraft injected to FDM
+Temporally activated stochastic events,Yes (Poisson),verified: seeded arrivals
+FOV-based sensing,Yes (angular + slant range),verified geometrically
+Propulsion-energy tracking,Yes (aero power),verified: non-negative integral
+Landing / termination support,Yes,verified: descending landing
+Deterministic seeds,Yes,verified: seed -> thermal+event RNG
+Per-UAV structured logging,Yes,"verified: traces, ledgers, manifests"
+Scalability evaluation,Yes (6/12/24),verified: resource overhead measured
+Compatibility with existing tools,Yes (MAVSDK/MAVLink/DDS),standard interfaces

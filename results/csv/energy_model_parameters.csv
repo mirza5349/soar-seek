@@ -1,0 +1,12 @@
+parameter,value,notes
+mass_kg,1.5,Airframe mass for weight/lift
+wing_area_m2,0.9,Reference wing area
+aspect_ratio,14.0,Wing aspect ratio
+CD0,0.012,Zero-lift drag coefficient
+oswald_e,0.95,Oswald efficiency
+eta_prop,0.85,Propulsive efficiency
+rho_kg_m3,1.225,Air density
+V_nom_v,14.8,Nominal battery voltage
+battery_capacity_scaled_wh,4.0,SCALED capacity used to TRIGGER FSM energy states within the short horizon
+battery_capacity_physical_wh,76.96,PHYSICAL 14.8V 5.2Ah pack used for ENERGY-MODEL assessment (power/energy are physical)
+energy_scope,propulsion_only,"Excludes avionics, payload, communication, onboard computing"

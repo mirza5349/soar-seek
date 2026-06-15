@@ -1,0 +1,176 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index fc57b95ef..28e01375e 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -121,16 +121,29 @@ execute_process(
+ 
+ # git describe to X.Y.Z version
+ string(REPLACE "." ";" VERSION_LIST ${PX4_GIT_TAG})
++list(LENGTH VERSION_LIST VERSION_LIST_LEN)
+ 
+-# major version
+-list(GET VERSION_LIST 0 PX4_VERSION_MAJOR)
+-string(REPLACE "v" "" PX4_VERSION_MAJOR ${PX4_VERSION_MAJOR})
++# major version (default to 1 if tag not available, e.g. shallow clone)
++if(VERSION_LIST_LEN GREATER 0)
++  list(GET VERSION_LIST 0 PX4_VERSION_MAJOR)
++  string(REPLACE "v" "" PX4_VERSION_MAJOR ${PX4_VERSION_MAJOR})
++else()
++  set(PX4_VERSION_MAJOR "1")
++endif()
+ # minor version
+-list(GET VERSION_LIST 1 PX4_VERSION_MINOR)
++if(VERSION_LIST_LEN GREATER 1)
++  list(GET VERSION_LIST 1 PX4_VERSION_MINOR)
++else()
++  set(PX4_VERSION_MINOR "15")
++endif()
+ # patch version
+-list(GET VERSION_LIST 2 PX4_VERSION_PATCH)
+-string(REPLACE "-" ";" PX4_VERSION_PATCH ${PX4_VERSION_PATCH})
+-list(GET PX4_VERSION_PATCH 0 PX4_VERSION_PATCH)
++if(VERSION_LIST_LEN GREATER 2)
++  list(GET VERSION_LIST 2 PX4_VERSION_PATCH)
++  string(REPLACE "-" ";" PX4_VERSION_PATCH ${PX4_VERSION_PATCH})
++  list(GET PX4_VERSION_PATCH 0 PX4_VERSION_PATCH)
++else()
++  set(PX4_VERSION_PATCH "0")
++endif()
+ 
+ # # Capture only the hash part after 'g'
+ string(REGEX MATCH "g([a-f0-9]+)$" GIT_HASH "${PX4_GIT_TAG}")
+diff --git a/ROMFS/px4fmu_common/init.d-posix/airframes/CMakeLists.txt b/ROMFS/px4fmu_common/init.d-posix/airframes/CMakeLists.txt
+index 9277ad303..2e43f6d9a 100644
+--- a/ROMFS/px4fmu_common/init.d-posix/airframes/CMakeLists.txt
++++ b/ROMFS/px4fmu_common/init.d-posix/airframes/CMakeLists.txt
+@@ -63,6 +63,7 @@ px4_add_romfs_files(
+ 	1043_gazebo-classic_standard_vtol_drop
+ 	1044_gazebo-classic_plane_lidar
+ 	1045_gazebo-classic_quadtailsitter
++	1046_jsbsim_soarer
+ 	1060_gazebo-classic_rover
+ 	1061_gazebo-classic_r1_rover
+ 	1062_flightgear_tf-r1
+diff --git a/ROMFS/px4fmu_common/init.d-posix/px4-rc.mavlink b/ROMFS/px4fmu_common/init.d-posix/px4-rc.mavlink
+index 15c6c2a79..15d5ff784 100644
+--- a/ROMFS/px4fmu_common/init.d-posix/px4-rc.mavlink
++++ b/ROMFS/px4fmu_common/init.d-posix/px4-rc.mavlink
+@@ -2,8 +2,11 @@
+ # shellcheck disable=SC2154
+ 
+ udp_offboard_port_local=$((14580+px4_instance))
+-udp_offboard_port_remote=$((14540+px4_instance))
+-[ "$px4_instance" -gt 9 ] && udp_offboard_port_remote=14549 # use the same ports for more than 10 instances to avoid port overlaps
++# Soar&Seek: offboard (MAVSDK) remote port in a dedicated 14640+ band, unique
++# for ALL instances. PX4 stock collapses instances >9 onto a single shared
++# port 14549 (the line removed here), which is the root cause of UAV IDs >=10
++# never receiving telemetry / never arming in multi-vehicle SITL.
++udp_offboard_port_remote=$((14640+px4_instance))
+ udp_onboard_payload_port_local=$((14280+px4_instance))
+ udp_onboard_payload_port_remote=$((14030+px4_instance))
+ udp_onboard_gimbal_port_local=$((13030+px4_instance))
+@@ -11,7 +14,7 @@ udp_onboard_gimbal_port_remote=$((13280+px4_instance))
+ udp_gcs_port_local=$((18570+px4_instance))
+ 
+ # GCS link
+-mavlink start -x -u $udp_gcs_port_local -r 4000000 -f
++mavlink start -x -u $udp_gcs_port_local -r 4000000 -f -o $((14550+px4_instance))
+ mavlink stream -r 50 -s POSITION_TARGET_LOCAL_NED -u $udp_gcs_port_local
+ mavlink stream -r 50 -s LOCAL_POSITION_NED -u $udp_gcs_port_local
+ mavlink stream -r 50 -s GLOBAL_POSITION_INT -u $udp_gcs_port_local
+diff --git a/Tools/simulation/flightgear/flightgear_bridge b/Tools/simulation/flightgear/flightgear_bridge
+--- a/Tools/simulation/flightgear/flightgear_bridge
++++ b/Tools/simulation/flightgear/flightgear_bridge
+@@ -1 +1 @@
+-Subproject commit f47ce7b5fbbb3aa43d33d2be1f6cd3746b13d5bf
++Subproject commit f47ce7b5fbbb3aa43d33d2be1f6cd3746b13d5bf-dirty
+diff --git a/Tools/simulation/jsbsim/jsbsim_bridge b/Tools/simulation/jsbsim/jsbsim_bridge
+--- a/Tools/simulation/jsbsim/jsbsim_bridge
++++ b/Tools/simulation/jsbsim/jsbsim_bridge
+@@ -1 +1 @@
+-Subproject commit 68de2cc63ded9a0d6641d45e9eb3ed2b43454cba
++Subproject commit 68de2cc63ded9a0d6641d45e9eb3ed2b43454cba-dirty
+diff --git a/Tools/simulation/jsbsim/sitl_run.sh b/Tools/simulation/jsbsim/sitl_run.sh
+index e76bdba29..8d4154319 100755
+--- a/Tools/simulation/jsbsim/sitl_run.sh
++++ b/Tools/simulation/jsbsim/sitl_run.sh
+@@ -27,7 +27,11 @@ echo world: $world
+ echo src_path: $src_path
+ echo build_path: $build_path
+ 
+-rootfs="$build_path/rootfs" # this is the working directory
++if [ -n "$PX4_INSTANCE" ]; then
++	rootfs="$build_path/rootfs_$PX4_INSTANCE"
++else
++	rootfs="$build_path/rootfs"
++fi
+ mkdir -p "$rootfs"
+ 
+ # To disable user input
+@@ -59,6 +63,9 @@ case "$model" in
+         hexarotor_x)
+             MODEL_NAME="hexarotor_x"
+             ;;
++        soarer)
++            MODEL_NAME="soarer"
++            ;;
+         *)
+             echo "Unknown Model"
+             exit 1
+@@ -89,7 +96,13 @@ pushd "$rootfs" >/dev/null
+ # Do not exit on failure now from here on because we want the complete cleanup
+ set +e
+ 
+-sitl_command="\"$sitl_bin\" $no_pxh \"$build_path\"/etc"
++if [ -n "$PX4_INSTANCE" ]; then
++	instance_arg="-i $PX4_INSTANCE"
++else
++	instance_arg=""
++fi
++
++sitl_command="\"$sitl_bin\" $no_pxh $instance_arg \"$build_path\"/etc"
+ 
+ echo SITL COMMAND: $sitl_command
+ eval $sitl_command
+diff --git a/src/modules/simulation/simulator_mavlink/sitl_targets_jsbsim.cmake b/src/modules/simulation/simulator_mavlink/sitl_targets_jsbsim.cmake
+index 357c2bd85..f9a07bd39 100644
+--- a/src/modules/simulation/simulator_mavlink/sitl_targets_jsbsim.cmake
++++ b/src/modules/simulation/simulator_mavlink/sitl_targets_jsbsim.cmake
+@@ -21,7 +21,9 @@ if(JSBSIM_INCLUDE_DIR)
+ 	include(ExternalProject)
+ 	ExternalProject_Add(jsbsim_bridge
+ 		SOURCE_DIR ${PX4_SOURCE_DIR}/Tools/simulation/jsbsim/jsbsim_bridge
+-		CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
++		CMAKE_ARGS
++			-DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
++			-DJSBSIM_ROOT_DIR=$ENV{JSBSIM_ROOT_DIR}
+ 		BINARY_DIR ${PX4_BINARY_DIR}/build_jsbsim_bridge
+ 		INSTALL_COMMAND ""
+ 		DEPENDS git_jsbsim_bridge
+@@ -37,6 +39,7 @@ if(JSBSIM_INCLUDE_DIR)
+ 		quadrotor_x
+ 		hexarotor_x
+ 		malolo
++		soarer
+ 	)
+ 
+ 	set(worlds
+diff --git a/src/modules/uxrce_dds_client/dds_topics.yaml b/src/modules/uxrce_dds_client/dds_topics.yaml
+index eb0d86cb0..35f6482ae 100644
+--- a/src/modules/uxrce_dds_client/dds_topics.yaml
++++ b/src/modules/uxrce_dds_client/dds_topics.yaml
+@@ -65,6 +65,14 @@ publications:
+   - topic: /fmu/out/vehicle_local_position
+     type: px4_msgs::msg::VehicleLocalPosition
+ 
++  # Soar&Seek: simulator (JSBSim FDM) ground truth, for PX4-EKF vs JSBSim
++  # verification (RMSE of estimate against truth).
++  - topic: /fmu/out/vehicle_local_position_groundtruth
++    type: px4_msgs::msg::VehicleLocalPosition
++
++  - topic: /fmu/out/vehicle_attitude_groundtruth
++    type: px4_msgs::msg::VehicleAttitude
++
+   - topic: /fmu/out/vehicle_odometry
+     type: px4_msgs::msg::VehicleOdometry
+ 

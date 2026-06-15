@@ -1,0 +1,9 @@
+builtin_interfaces/Time stamp
+uint32 vehicle_id
+float32 soc_pct
+float32 energy_consumed_wh
+float32 energy_total_wh
+float32 power_draw_w
+float32 voltage_v
+float32 current_a
+float32 est_remaining_s

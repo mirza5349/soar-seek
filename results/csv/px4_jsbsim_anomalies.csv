@@ -1,0 +1,1 @@
+run_id,uav_id,timestamp,state_variable,px4_value,jsbsim_value,absolute_error,threshold,cause

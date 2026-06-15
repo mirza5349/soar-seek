@@ -1,0 +1,39 @@
+baseline_seeds:
+- 42
+- 43
+- 44
+- 45
+- 46
+nominal_seed: 42
+notes: Master seed -> thermal_field seed; ground_event seed = master + 100.
+scalability_seeds:
+- 101
+- 102
+- 103
+sensitivity_seeds:
+- 42
+- 43
+- 44
+- 45
+- 46
+stochastic_seeds:
+- 42
+- 43
+- 44
+- 45
+- 46
+- 47
+- 48
+- 49
+- 50
+- 51
+- 52
+- 53
+- 54
+- 55
+- 56
+- 57
+- 58
+- 59
+- 60
+- 61

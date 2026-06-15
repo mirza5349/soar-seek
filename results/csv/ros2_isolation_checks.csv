@@ -1,0 +1,5 @@
+check,result,detail
+ros2_namespace_uniqueness,PASS,px4_<id> namespaces unique across fleet
+dds_client_key_uniqueness,PASS,"UXRCE_DDS_KEY = instance+1, unique"
+node_name_uniqueness,PASS,nodes namespaced per px4_<id>; names unique within namespace
+cross_agent_contamination,PASS,0/441 trajectory-overlap failures

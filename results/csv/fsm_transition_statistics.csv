@@ -1,0 +1,2 @@
+condition,n_runs,transitions_per_uav_per_min_mean,transitions_per_uav_per_min_max,mean_state_dwell_s,median_state_dwell_s,min_state_dwell_s,sub_2s_dwell_count,sub_2s_dwell_pct,thermal_reentries_total,rejected_transitions_total
+stochastic_full_framework,20,1.0717876493651344,3.0622660783874127,67.8084550118385,34.289000034332275,0.08299994468688965,67,8.611825192802057,184,566

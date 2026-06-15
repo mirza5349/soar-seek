@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  File:     prop_soarer.xml
+  Aircraft: Soarer UAV (Step 1, standalone FDM)
+
+  Fixed-pitch propeller sized for:
+    D = 10 in (0.254 m), Variable-RPM (constspeed=0)
+
+  Design operating point (cruise, V=18 m/s):
+    J_cruise  = 0.60
+    CT_cruise = 0.0305
+    CP_cruise = 0.02153
+    eta_prop  = J * CT / CP = 0.850  (matches spec requirement)
+
+  CT(J) decreases linearly from CT0=0.1525 to zero at J_max=0.75
+  CP(J) designed to give peak eta approx 0.85 near J=0.60
+
+  Motor-off (throttle=0):
+    The motor delivers no torque; prop windmills freely.
+    Windmill drag is small relative to induced drag at glide speeds
+    and is accounted for in the CD0 budget (+approx 0.001 effective CD0 rise).
+    See VALIDATION.md Section 2 for measured glide-ratio impact.
+-->
+
+<propeller name="prop_soarer" version="1.1">
+  <ixx unit="KG*M2"> 2.5e-4 </ixx>
+  <diameter unit="IN"> 10.0 </diameter>
+  <numblades> 2 </numblades>
+  <constspeed> 0 </constspeed>
+  <minrpm> 10 </minrpm>
+  <maxrpm> 16000 </maxrpm>
+  <p_factor> 0.0 </p_factor>
+
+  <!--
+    Thrust coefficient vs advance ratio J = V/(n*D)
+    Linear decrease: CT = 0.1525 * (1 - J/0.75)
+    Cruise operating point: J=0.60, CT=0.0305
+  -->
+  <table name="C_THRUST" type="internal">
+    <tableData>
+      0.000   0.1525
+      0.075   0.1372
+      0.150   0.1219
+      0.225   0.1067
+      0.300   0.0915
+      0.375   0.0763
+      0.450   0.0610
+      0.525   0.0458
+      0.600   0.0305
+      0.675   0.0076
+      0.750   0.0000
+      0.850  -0.0050
+    </tableData>
+  </table>
+
+  <!--
+    Power coefficient vs advance ratio J
+    Shaped so eta = J*CT/CP peaks at approx 0.85 near J=0.60.
+    Cruise check:  eta = 0.600 * 0.0305 / 0.02153 = 0.850
+  -->
+  <table name="C_POWER" type="internal">
+    <tableData>
+      0.000   0.0580
+      0.075   0.0550
+      0.150   0.0515
+      0.225   0.0475
+      0.300   0.0428
+      0.375   0.0375
+      0.450   0.0316
+      0.525   0.0260
+      0.600   0.02153
+      0.675   0.0148
+      0.750   0.0090
+      0.850   0.0040
+    </tableData>
+  </table>
+
+</propeller>

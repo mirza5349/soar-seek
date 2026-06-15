@@ -1,0 +1,9 @@
+builtin_interfaces/Time stamp
+uint32 vehicle_id
+float64 latitude_deg
+float64 longitude_deg
+float32 relative_altitude_m
+float32 north_m
+float32 east_m
+float32 w_peak_mps
+float32 radius_m

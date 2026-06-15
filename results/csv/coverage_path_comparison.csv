@@ -1,0 +1,6 @@
+strategy,total_path_length_km,mean_per_uav_km,max_per_uav_km,fov_coverage_pct,uncovered_area_km2,overlap_pct,turn_count,waypoint_count,est_completion_time_min,workload_imbalance
+"Selected (orientation-optimized lawnmower, 6-UAV partition)",23.29,3.88,9.66,62.9,3.36,19.5,29,41,13.4,1.488
+North-South lawnmower,35.87,5.98,8.58,84.9,1.36,10.6,34,36,11.9,0.435
+East-West lawnmower,35.19,5.86,10.26,83.4,1.5,7.5,14,20,14.3,0.752
+Boustrophedon (2-cell),37.32,6.22,8.61,85.6,1.3,13.8,34,36,12.0,0.385
+Spiral/inward coverage,42.71,6.52,8.87,83.8,1.46,18.2,17,22,12.3,0.361

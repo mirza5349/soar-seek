@@ -1,0 +1,86 @@
+battery_estimator_node:
+  ros__parameters:
+    AR: 14.0
+    CD0: 0.012
+    V_nom: 14.8
+    battery_capacity_wh: 20.0
+    eta_prop: 0.85
+    mass_kg: 1.5
+    oswald_e: 0.95
+    rho_kg_m3: 1.225
+    update_rate_hz: 2.0
+    wing_area_m2: 0.9
+fov_detection_node:
+  ros__parameters:
+    fov_half_angle_deg: 30.0
+    max_detection_range_m: 500.0
+    update_rate_hz: 2.0
+fsm_node:
+  ros__parameters:
+    enable_event_investigation: false
+    enable_soaring: true
+    event_investigation_priority_threshold: 3
+    investigation_duration_s: 30.0
+    max_cue_distance_m: 1000.0
+    patrol_waypoints_1:
+    - 200.0
+    - 200.0
+    - 60.0
+    - 200.0
+    - -200.0
+    - 60.0
+    - -200.0
+    - -200.0
+    - 60.0
+    - -200.0
+    - 200.0
+    - 60.0
+    patrol_waypoints_2:
+    - 300.0
+    - 300.0
+    - 60.0
+    - 300.0
+    - -300.0
+    - 60.0
+    - -300.0
+    - -300.0
+    - 60.0
+    - -300.0
+    - 300.0
+    - 60.0
+    reserve_soc: 7.0
+    search_soc: 85.0
+    thermal_ceiling_m: 150.0
+    update_rate_hz: 10.0
+    usable_lift_threshold: 1.5
+ground_event_node:
+  ros__parameters:
+    area_size_m: 2000.0
+    event_lifetime_s: 300.0
+    event_rate_hz: 0.05
+    max_active_events: 20
+    ref_lat_deg: 47.3769
+    ref_lon_deg: 8.5417
+    seed: 201
+    update_rate_hz: 1.0
+metrics_collector_node:
+  ros__parameters:
+    num_vehicles: 6
+    output_dir: /tmp/soarer_run_n6
+    reported_value_flag: JSBSIM
+    update_rate_hz: 1.0
+thermal_field_node:
+  ros__parameters:
+    alt_ceiling_m: 200.0
+    alt_floor_m: 0.0
+    area_size_m: 2000.0
+    drift_speed_mps: 0.5
+    num_thermals: 8
+    num_vehicles: 6
+    radius_max_m: 200.0
+    radius_min_m: 50.0
+    seed: 101
+    thermal_lifetime_s: 600.0
+    update_rate_hz: 5.0
+    w_peak_max_mps: 5.0
+    w_peak_min_mps: 1.5

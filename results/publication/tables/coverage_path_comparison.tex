@@ -1,0 +1,18 @@
+\begin{table*}[t]
+\centering
+\small
+\caption{Coverage-path comparison (geometric, FOV-based). The selected route is reasonable but is not claimed optimal.}
+\label{tab:coverage_path_comparison}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrrr}
+\toprule
+Coverage strategy & Total length (km) & Mean per UAV (km) & FOV coverage (\%) & Uncovered area (sq km) & Overlap (\%) & Turns & Imbalance \\
+\midrule
+Selected & 23.29 & 3.88 & 62.9 & 3.36 & 19.5 & 29 & 1.49 \\
+North-South lawnmower & 35.87 & 5.98 & 84.9 & 1.36 & 10.6 & 34 & 0.43 \\
+East-West lawnmower & 35.19 & 5.86 & 83.4 & 1.50 & 7.5 & 14 & 0.75 \\
+Boustrophedon & 37.32 & 6.22 & 85.6 & 1.30 & 13.8 & 34 & 0.39 \\
+Spiral/inward coverage & 42.71 & 6.52 & 83.8 & 1.46 & 18.2 & 17 & 0.36 \\
+\bottomrule
+\end{tabular}}
+\end{table*}

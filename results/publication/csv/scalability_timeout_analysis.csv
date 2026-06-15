@@ -1,0 +1,4 @@
+fleet_size,n_runs,total_timeouts,mean_timeouts_per_run,timeouts_per_uav,timeouts_per_uav_minute,startup_vs_inmission,retry_success,commands_permanently_lost,effect_on_mission_execution,effect_on_process_stability
+6,3,0,0.0,0.0,0.0,NR (counts not individually timestamped),links recovered; all UAVs completed,0,"none observed (full arming, complete traces)",none (0 process failures)
+12,3,0,0.0,0.0,0.0,NR (counts not individually timestamped),links recovered; all UAVs completed,0,"none observed (full arming, complete traces)",none (0 process failures)
+24,3,73,24.33,1.014,0.5069,NR (counts not individually timestamped),links recovered; all UAVs completed,0,"none observed (full arming, complete traces)",none (0 process failures)

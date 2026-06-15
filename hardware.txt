@@ -1,0 +1,12 @@
+Evaluation Host System Specifications:
+
+CPU: 13th Gen Intel(R) Core(TM) i9-13900H (20 virtual cores)
+Architecture: x86_64
+Memory: 62 GiB RAM
+Swap: 2.0 GiB
+OS: Ubuntu 22.04 LTS (Jammy Jellyfish)
+Kernel: Linux 6.8.0-124-generic #124~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC
+DDS Agent: Micro-XRCE-DDS Agent running on port 8889
+ROS Version: ROS 2 Humble Hawksbill
+Autopilot: PX4 Autopilot SITL (v1.14 environment)
+Flight Dynamics Engine: JSBSim (standalone FDM)

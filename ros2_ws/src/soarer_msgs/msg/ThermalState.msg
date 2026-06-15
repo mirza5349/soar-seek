@@ -1,0 +1,9 @@
+uint32 id
+float32 center_north_m
+float32 center_east_m
+float32 radius_m
+float32 core_radius_m
+float32 w_peak_mps
+float32 alt_floor_m
+float32 alt_ceiling_m
+bool active

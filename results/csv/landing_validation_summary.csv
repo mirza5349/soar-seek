@@ -1,0 +1,2 @@
+n_trials,landing_zone_radius_m,landing_entry_rate_pct,approach_completion_rate_pct,landing_zone_success_rate_pct,touchdown_success_rate_pct,disarm_success_rate_pct,landing_completion_rate_pct,mean_landing_duration_s,mean_final_horizontal_error_m,mean_cross_track_error_m,mean_final_altitude_error_m,mean_descent_rate_mps,max_sustained_descent_rate_mps,total_command_rejections,total_mavlink_timeouts
+6,100.0,100.0,100.0,83.3,66.7,83.3,66.7,146.7,67.88,54.64,1.93,1.138,2.721,0,0

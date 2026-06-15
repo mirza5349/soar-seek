@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+  File:     soarer_motor.xml
+  Aircraft: Soarer UAV (Step 1 — standalone FDM)
+
+  Models the brushless electric motor.
+  Max shaft power 400 W; the Python interface limits throttle accordingly.
+  Voltage / Ah bookkeeping is out of scope for Step 1.
+-->
+
+<electric_engine name="soarer_motor">
+  <power unit="WATTS"> 400.0 </power>
+</electric_engine>

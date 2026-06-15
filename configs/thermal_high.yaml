@@ -1,0 +1,9 @@
+# Override file: merged on top of scenario_nominal.yaml by run scripts
+thermal_field_node:
+  ros__parameters:
+    num_thermals: 16
+    radius_max_m: 250.0
+    radius_min_m: 80.0
+    thermal_lifetime_s: 900.0
+    w_peak_max_mps: 6.0
+    w_peak_min_mps: 2.5
