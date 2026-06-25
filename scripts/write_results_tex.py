@@ -84,7 +84,7 @@ def main():
     w(rf"Table~\ref{{tab:framework_verification}} reports the verification suite. The "
       rf"PX4 extended Kalman filter (EKF) estimate is compared against the JSBSim flight-"
       rf"dynamics ground truth relayed through \texttt{{HIL\_STATE\_QUATERNION}}; "
-      rf"Fig.~\ref{{fig:px4_jsbsim_verification}} shows altitude, ground-speed and "
+      rf"Figs.~\ref{{fig:pxjsbsim_altitude}}--\ref{{fig:pxjsbsim_attitude_error}} show altitude, ground-speed and "
       rf"attitude comparisons with their error traces and the shaded initialization "
       rf"window. After the documented $20$\,s estimator-convergence window is excluded, "
       rf"the mean post-initialization root-mean-square errors are "
@@ -108,8 +108,8 @@ def main():
     w("")
     # ---- coverage
     w(r"\subsection{Coverage-Path and Executed-Trajectory Analysis}")
-    w(rf"Fig.~\ref{{fig:planned_executed_trajectories}} shows the planned partitioned "
-      rf"route (panel a) and the executed multi-UAV trajectories (panel b), including "
+    w(rf"Figs.~\ref{{fig:planned_route}} and~\ref{{fig:executed_trajectories}} show the planned partitioned "
+      rf"route and the executed multi-UAV trajectories, including "
       rf"thermal footprints, thermal-exploitation segments with entry/exit markers, "
       rf"investigated high-priority (HP) event loiters, glide-return and landing "
       rf"segments. Table~\ref{{tab:coverage_path_comparison}} compares the selected "
@@ -124,7 +124,7 @@ def main():
     rbm = rb.set_index("Configuration") if "Configuration" in rb.columns else pd.DataFrame()
     w(r"\subsection{Reduced-Framework Baseline Comparison}")
     w(r"Table~\ref{tab:reduced_framework_baselines} and "
-      r"Fig.~\ref{fig:reduced_framework_baselines} compare the full framework against "
+      r"Figs.~\ref{fig:baseline_final_soc}--\ref{fig:baseline_thermalling} compare the full framework against "
       r"five reduced configurations over five matched seeds. Improvements and "
       r"degradations are interpreted separately. Disabling event response removes "
       r"HP-event investigation entirely while preserving more energy; disabling soaring "
@@ -136,7 +136,7 @@ def main():
     w("")
     # ---- energy
     w(r"\subsection{Propulsion-Energy Assessment}")
-    w(r"Fig.~\ref{fig:propulsion_energy_assessment} presents the propulsion-only energy "
+    w(r"Figures~\ref{fig:energy_by_mode}--\ref{fig:battery_model_comparison} present the propulsion-only energy "
       r"budget by FSM mode (panel a), SOC trajectories coloured by mode (panel b), and "
       r"the online state-dependent estimator against a constant-power model and the PX4 "
       r"battery estimate (panel c). Thermal-exploitation energy is reported as "
@@ -145,20 +145,20 @@ def main():
     w("")
     # ---- thermal
     w(r"\subsection{Thermal-Field Sensitivity Analysis}")
-    w(rf"Fig.~\ref{{fig:thermal_field_sensitivity}} reports thermal encounters per UAV, "
+    w(rf"Figs.~\ref{{fig:thermal_encounters}}--\ref{{fig:thermal_final_soc}} report thermal encounters per UAV, "
       rf"thermalling duration, propulsion-energy saving relative to powered cruise, and "
       rf"final SOC across low, nominal and high thermal conditions (five matched seeds "
       rf"each). Thermalling duration rises from {thr('low','thermalling_time_s_mean'):.0f}\,s "
       rf"(low) to {thr('high','thermalling_time_s_mean'):.0f}\,s (high), and the "
       rf"propulsion-energy saving rises from {thr('low','exploitation_saving_wh_mean'):.1f}\,Wh "
       rf"to {thr('high','exploitation_saving_wh_mean'):.1f}\,Wh, a monotonic response. "
-      rf"Fig.~\ref{{fig:thermal_interaction_trace}} shows a representative exploitation "
+      rf"Figs.~\ref{{fig:thermal_trace_path}} and~\ref{{fig:thermal_trace_time}} show a representative exploitation "
       rf"segment: the UAV circles within the active thermal footprint while altitude "
       rf"increases and propulsion energy remains essentially flat (motor-off soaring).")
     w("")
     # ---- events
     w(rf"\subsection{{Ground-Event Sensitivity Analysis}}")
-    w(rf"Fig.~\ref{{fig:ground_event_sensitivity}} reports HP-event outcomes and "
+    w(rf"Figs.~\ref{{fig:event_outcomes}} and~\ref{{fig:event_latency}} report HP-event outcomes and "
       rf"investigation latency across event loads. HP investigation percentage is "
       rf"{evr('low','hp_investigated_pct_mean'):.0f}\,\%, "
       rf"{evr('nominal','hp_investigated_pct_mean'):.0f}\,\% and "
@@ -174,7 +174,7 @@ def main():
     # ---- stochastic
     w(r"\subsection{Repeated Stochastic Evaluation}")
     w(rf"Table~\ref{{tab:stochastic_results}} and "
-      rf"Fig.~\ref{{fig:repeated_stochastic_summary}} summarise 20 seeded runs of the "
+      rf"Figs.~\ref{{fig:stoch_route}}--\ref{{fig:stoch_detected}} summarise 20 seeded runs of the "
       rf"full framework. Route completion is "
       rf"{sm('Route completion (%)','Mean'):.1f}\,\% "
       rf"($\pm${sm('Route completion (%)','95% CI'):.1f}\,\% at 95\,\% confidence), "
@@ -189,7 +189,7 @@ def main():
     sc24 = sc[sc["Fleet"] == "24 UAVs"].iloc[0] if "Fleet" in sc.columns else None
     w(r"\subsection{Scalability and Resource-Overhead Analysis}")
     w(rf"Table~\ref{{tab:scalability_overhead}} and "
-      rf"Fig.~\ref{{fig:scalability_overhead}} report resource overhead at 6, 12 and 24 "
+      rf"Figs.~\ref{{fig:scal_cpu}}--\ref{{fig:scal_latency}} report resource overhead at 6, 12 and 24 "
       rf"UAVs (three seeds each), with the denominator fixed to the requested fleet "
       rf"size. After correcting an offboard-port assignment defect that previously "
       rf"prevented vehicles with two-digit identifiers from arming, arming success is "
@@ -211,7 +211,7 @@ def main():
     # ---- landing
     w(r"\subsection{Landing-Cycle Validation}")
     w(rf"Table~\ref{{tab:landing_validation}} and "
-      rf"Fig.~\ref{{fig:landing_cycle_validation}} report {int(ls['n_trials'])} landing "
+      rf"Figs.~\ref{{fig:landing_tracks}}--\ref{{fig:landing_timeline}} report {int(ls['n_trials'])} landing "
       rf"trials from distinct approach positions. Touchdown success requires a spatial "
       rf"landing-zone condition (within a {ls['landing_zone_radius_m']:.0f}\,m radius of "
       rf"the landing point) in addition to low altitude and ground speed. Landing-state "
@@ -252,58 +252,91 @@ def main():
       r"optimality or real-flight-validity claims are made.")
     w("")
 
-    # ---- figure/table float blocks
-    figs = [("planned_executed_trajectories", "fig:planned_executed_trajectories",
-             "Planned partitioned coverage route (a) and executed multi-UAV trajectories (b) "
-             "for the nominal case study, with thermal footprints, thermal entry/exit, "
-             "event loiters, glide-return and landing segments.", True),
-            ("px4_jsbsim_verification", "fig:px4_jsbsim_verification",
-             "PX4-EKF versus JSBSim-FDM comparison: altitude (a,b), ground speed (c,d) and "
-             "attitude (e,f) with error traces. The shaded interval is the excluded "
-             "initialization window; status PASS\\_WITH\\_DOCUMENTED\\_STARTUP\\_TRANSIENTS.", True),
-            ("reduced_framework_baselines", "fig:reduced_framework_baselines",
-             "Reduced-framework baselines: final SOC (a), propulsion energy (b), HP-event "
-             "investigation percentage (c) and thermalling duration (d); bars show mean and "
-             "standard deviation over matched seeds.", True),
-            ("propulsion_energy_assessment", "fig:propulsion_energy_assessment",
-             "Propulsion-only energy assessment: energy by FSM mode (a), SOC trajectories by "
-             "mode (b), and online estimator versus constant-power model and PX4 estimate (c).", True),
-            ("thermal_field_sensitivity", "fig:thermal_field_sensitivity",
-             "Thermal-field sensitivity across low, nominal and high conditions: encounters per "
-             "UAV (a), thermalling duration (b), energy saving relative to cruise (c) and final "
-             "SOC (d); error bars show standard deviation.", True),
-            ("thermal_interaction_trace", "fig:thermal_interaction_trace",
-             "Representative thermal interaction: UAV trajectory inside the active thermal "
-             "footprint (a) and altitude, updraft and cumulative propulsion energy versus time "
-             "(b), with the thermal-exploitation interval shaded.", True),
-            ("ground_event_sensitivity", "fig:ground_event_sensitivity",
-             "Ground-event sensitivity: mean HP-event outcomes and detection/investigation "
-             "percentages by load (a) and investigation latency (b). The sample count $n$ of "
-             "investigated events is annotated for every condition; mean, median and a "
-             "one-standard-deviation interval (clamped at zero) are shown only for $n\\geq2$. "
-             "The low-load latency is descriptive, resting on few investigated events, and is "
-             "not statistically representative.", True),
-            ("repeated_stochastic_summary", "fig:repeated_stochastic_summary",
-             "Repeated stochastic evaluation over 20 seeds: route completion (a), final SOC (b), "
-             "thermal encounters (c), thermalling duration (d), HP investigation (e) and detected "
-             "events (f). Boxplots show median and quartiles; diamonds mark the mean.", True),
-            ("scalability_overhead", "fig:scalability_overhead",
-             "Scalability and resource overhead versus fleet size: CPU (a), memory (b), real-time "
-             "factor (c) and ROS\\,2 latency (d); error bars span repeated runs.", True),
-            ("landing_cycle_validation", "fig:landing_cycle_validation",
-             "Landing-cycle validation: ground tracks with the landing zone (a), altitude versus "
-             "distance to the landing point (b), and per-UAV landing-subphase timeline (c) showing "
-             "approach/descent and final-approach phases with entry, touchdown and disarm markers. "
-             "Green/red distinguish successful and failed touchdown and disarm. Full landing "
-             "completion was achieved in 4 of 6 trials.", True)]
-    for name, lab, cap, wide in figs:
-        env = "figure*" if wide else "figure"
-        w(rf"\begin{{{env}}}[t]")
+    # ---- single-column figure floats (one image per figure, IEEE column) ----
+    figs = [
+        ("planned_route", "fig:planned_route",
+         "Planned partitioned six-UAV coverage route."),
+        ("executed_trajectories", "fig:executed_trajectories",
+         "Executed multi-UAV trajectories for the nominal case study, showing thermal "
+         "footprints, thermal-exploitation segments with entry/exit, HP-event loiters, "
+         "glide-return and landing segments."),
+        ("pxjsbsim_altitude", "fig:pxjsbsim_altitude",
+         "PX4-EKF versus JSBSim-FDM altitude."),
+        ("pxjsbsim_altitude_error", "fig:pxjsbsim_altitude_error",
+         "PX4-EKF versus JSBSim-FDM altitude error; shaded region is the excluded "
+         "initialization window."),
+        ("pxjsbsim_speed", "fig:pxjsbsim_speed",
+         "PX4-EKF versus JSBSim-FDM ground speed."),
+        ("pxjsbsim_speed_error", "fig:pxjsbsim_speed_error",
+         "PX4-EKF versus JSBSim-FDM ground-speed error (initialization window shaded)."),
+        ("pxjsbsim_attitude", "fig:pxjsbsim_attitude",
+         "PX4-EKF versus JSBSim-FDM attitude (pitch)."),
+        ("pxjsbsim_attitude_error", "fig:pxjsbsim_attitude_error",
+         "PX4-EKF versus JSBSim-FDM attitude error (initialization window shaded); overall "
+         "status PASS\\_WITH\\_DOCUMENTED\\_STARTUP\\_TRANSIENTS."),
+        ("baseline_final_soc", "fig:baseline_final_soc",
+         "Reduced-framework baselines: final SOC (mean and standard deviation over matched seeds)."),
+        ("baseline_energy", "fig:baseline_energy",
+         "Reduced-framework baselines: propulsion energy."),
+        ("baseline_hp_investigated", "fig:baseline_hp_investigated",
+         "Reduced-framework baselines: HP-event investigation percentage."),
+        ("baseline_thermalling", "fig:baseline_thermalling",
+         "Reduced-framework baselines: thermalling duration."),
+        ("energy_by_mode", "fig:energy_by_mode",
+         "Propulsion-only energy by FSM mode."),
+        ("soc_by_mode", "fig:soc_by_mode",
+         "SOC trajectories coloured by FSM mode (case study)."),
+        ("battery_model_comparison", "fig:battery_model_comparison",
+         "Final SOC: online estimator, constant-power model and PX4 estimate."),
+        ("thermal_encounters", "fig:thermal_encounters",
+         "Thermal-field sensitivity: thermal encounters per UAV."),
+        ("thermal_duration", "fig:thermal_duration",
+         "Thermal-field sensitivity: thermalling duration."),
+        ("thermal_saving", "fig:thermal_saving",
+         "Thermal-field sensitivity: propulsion-energy saving relative to powered cruise."),
+        ("thermal_final_soc", "fig:thermal_final_soc",
+         "Thermal-field sensitivity: final SOC. Error bars show standard deviation."),
+        ("thermal_trace_path", "fig:thermal_trace_path",
+         "Representative thermal interaction: UAV trajectory inside the active thermal footprint."),
+        ("thermal_trace_time", "fig:thermal_trace_time",
+         "Representative thermal interaction: altitude, updraft and cumulative propulsion energy "
+         "versus time, with the exploitation interval shaded."),
+        ("event_outcomes", "fig:event_outcomes",
+         "Ground-event sensitivity: mean HP-event outcomes and detection/investigation "
+         "percentages by event load."),
+        ("event_latency", "fig:event_latency",
+         "Ground-event sensitivity: HP investigation latency. The sample count $n$ is annotated "
+         "for every condition; mean, median and a one-standard-deviation interval (clamped at "
+         "zero) are shown only for $n\\geq2$. The low-load value is descriptive."),
+        ("stoch_route", "fig:stoch_route", "Repeated stochastic evaluation: route completion."),
+        ("stoch_soc", "fig:stoch_soc", "Repeated stochastic evaluation: final SOC."),
+        ("stoch_encounters", "fig:stoch_encounters", "Repeated stochastic evaluation: thermal encounters."),
+        ("stoch_thermalling", "fig:stoch_thermalling", "Repeated stochastic evaluation: thermalling duration."),
+        ("stoch_hp_inv", "fig:stoch_hp_inv", "Repeated stochastic evaluation: HP investigation percentage."),
+        ("stoch_detected", "fig:stoch_detected", "Repeated stochastic evaluation: detected-event percentage. "
+         "Boxplots show median and quartiles; diamonds mark the mean ($R=20$ seeds)."),
+        ("scal_cpu", "fig:scal_cpu", "Scalability: CPU usage versus fleet size."),
+        ("scal_mem", "fig:scal_mem", "Scalability: memory usage versus fleet size."),
+        ("scal_rtf", "fig:scal_rtf", "Scalability: real-time factor versus fleet size."),
+        ("scal_latency", "fig:scal_latency", "Scalability: ROS\\,2 latency versus fleet size. "
+         "Error bars span repeated runs."),
+        ("landing_tracks", "fig:landing_tracks",
+         "Landing validation: ground tracks with the landing zone; green/red mark successful/"
+         "failed touchdown."),
+        ("landing_alt_distance", "fig:landing_alt_distance",
+         "Landing validation: altitude versus distance to the landing point."),
+        ("landing_timeline", "fig:landing_timeline",
+         "Landing validation: per-UAV landing-subphase timeline (approach/descent and final "
+         "approach) with entry, touchdown and disarm markers. Full landing completion was "
+         "achieved in 4 of 6 trials."),
+    ]
+    for name, lab, cap in figs:
+        w(r"\begin{figure}[t]")
         w(r"\centering")
-        w(rf"\includegraphics[width=0.95\linewidth]{{figures/{name}.pdf}}")
+        w(rf"\includegraphics[width=\columnwidth]{{figures/{name}.pdf}}")
         w(rf"\caption{{{cap}}}")
         w(rf"\label{{{lab}}}")
-        w(rf"\end{{{env}}}")
+        w(r"\end{figure}")
         w("")
 
     # input the table files
